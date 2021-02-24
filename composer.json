@@ -1,0 +1,32 @@
+{
+    "name": "pierreminiggio/tiktok-downloader",
+    "description": "TikTok Downloader",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pierre MINIGGIO",
+            "email": "pierre@miniggiodev.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "pierreminiggio/shell-tiktok-downloader": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PierreMiniggio\\TikTokDownloader\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PierreMiniggio\\TikTokDownloaderTest\\": "test/"
+        }
+    },
+    "scripts": {
+        "test": "bash ./vendor/bin/phpunit test/"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
