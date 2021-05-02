@@ -29,7 +29,6 @@ class Downloader
      */
     public function downloadWithoutWatermark(string $videoUrl, string $destinationFile): void
     {
-        ob_start();
         $res = shell_exec(
             'bash '
                 . $this->bashScriptPath
@@ -39,12 +38,11 @@ class Downloader
                 . escapeshellarg($destinationFile)
                 . ' 2>&1'
         );
-        $res2 = ob_get_clean();
 
-        if (str_contains($res, '100,0%')) {
+        if (file_exists($destinationFile)) {
             return;
         }
 
-        throw new DownloadFailedException($res | $res2);
+        throw new DownloadFailedException($res);
     }
 }
