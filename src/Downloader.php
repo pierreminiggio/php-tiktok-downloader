@@ -9,19 +9,40 @@ class Downloader
 
     public function __construct()
     {
-        $this->bashScriptPath =
+        $projectPath =
             __DIR__
             . DIRECTORY_SEPARATOR
             . '..'
             . DIRECTORY_SEPARATOR
-            . 'vendor'
-            . DIRECTORY_SEPARATOR
-            . 'pierreminiggio'
-            . DIRECTORY_SEPARATOR
-            . 'shell-tiktok-downloader'
-            . DIRECTORY_SEPARATOR
-            . 'tikwm.sh'
         ;
+
+        $bashFilename = 'tikwm.sh';
+        $bashFilenameInsideProject =
+            'shell-tiktok-downloader'
+            . DIRECTORY_SEPARATOR
+            . $bashFilename
+        ;
+
+        $potentialsPaths = [
+            $projectPath
+                . 'vendor'
+                . DIRECTORY_SEPARATOR
+                . 'pierreminiggio'
+                . DIRECTORY_SEPARATOR
+                . $bashFilenameInsideProject
+            ,
+            $projectPath
+                . '..'
+                . DIRECTORY_SEPARATOR
+                . $bashFilenameInsideProject 
+        ];
+
+        foreach ($potentialsPaths as $potentialsPath) {
+            if (file_exists($potentialsPath)) {
+                $this->bashScriptPath = $potentialsPath;
+                break;
+            }
+        }
     }
 
     /**
